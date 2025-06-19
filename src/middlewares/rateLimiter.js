@@ -1,0 +1,1 @@
+//generic middleware that uses any strategy

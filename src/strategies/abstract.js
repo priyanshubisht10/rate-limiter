@@ -1,0 +1,1 @@
+//base class to implement stratergies
