@@ -1,7 +1,8 @@
 //entry point that exports strategies and rateLimiter middleware
 
 export { LeakyBucketLimiter } from './strategies/leakyBucket.js';
-export { TokenBucketLimiter } from './strategies/tokenBucket.js'
+export { TokenBucketLimiter } from './strategies/tokenBucket.js';
+export { FixedWindowLimiter } from './strategies/fixedWindow.js';
 
 export { createRateLimiter } from './middlewares/rateLimiter.js';
 
