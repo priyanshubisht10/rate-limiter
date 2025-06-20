@@ -1,10 +1,10 @@
-import { RateLimiterStrategy } from './abstract';
+import { RateLimiterStrategy } from './abstract.js';
 
 export class LeakyBucketLimiter extends RateLimiterStrategy {
-  constructor(config = {}) {
+  constructor({ leakRate = 1, capacity = 5 } = {}) {
     super();
-    this.leakRate = config.leakRate || 1;
-    this.capacity = config.capacity || 10;
+    this.leakRate = leakRate;
+    this.capacity = capacity;
     this.bucketMap = new Map();
   }
 
