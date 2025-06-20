@@ -11,5 +11,9 @@
   },
   "author": "Priyanshu Bisht",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
 }
