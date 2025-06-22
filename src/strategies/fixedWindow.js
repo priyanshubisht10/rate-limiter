@@ -10,8 +10,9 @@ export class FixedWindowLimiter extends RateLimiterStrategy {
 
   async allowRequest(ip) {
     const now = Date.now();
-    const currentWindow = Math.floor(now / 1000 / this.windowSizeInSeconds); 
+    const currentWindow = Math.floor(now / 1000 / this.windowSizeInSeconds); //calculate curr windowId
 
+    //no record for this ip yet i.e. treat as first request and allow
     if (!this.requestMap.has(ip)) {
       this.requestMap.set(ip, {
         count: 1,
@@ -20,16 +21,17 @@ export class FixedWindowLimiter extends RateLimiterStrategy {
       return true;
     }
 
-    const entry = this.requestMap.get(ip);
+    const entry = this.requestMap.get(ip); //get curr ip details (reqcount, windowId)
 
     if (entry.window === currentWindow) {
-      if (entry.count < this.maxReq) {
+      if (entry.count < this.maxReq) {       // curr user has requested lesser than the limit - allow req
         entry.count += 1;
         this.requestMap.set(ip, entry);
         return true;
       }
       return false;
     } else {
+      // window has changed - reset count and allow req
       this.requestMap.set(ip, {
         count: 1,
         window: currentWindow,
