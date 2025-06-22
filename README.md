@@ -32,23 +32,34 @@ cd rate-limiter
 npm install
 
 # Start the server
-nodemon example/app.js
+npm start 
 ```
-Server would be live at: http:localhost:3000
+Server would be live at: `http://localhost:3000`
 
 ## 📦 How to Use and Test
 
-You can use Postman, Thunder Client, or even `curl` to test any of the endpoints:
+You can use Postman, Thunder Client, or even using PowerShell and `curl` with the following command:
 
-### Example Test Using `curl`:
-```bash
-for i in {1..10}; do curl http://localhost:3000/sliding; echo; done
+```powershell
+for ($i = 1; $i -le 10; $i++) {
+    curl http://localhost:3000/sliding
+    Start-Sleep -Milliseconds 500
+}
+```
+Example Successful Response:
+```
+StatusCode        : 200
+StatusDescription : OK
+Content           : {"message":"Allowed req from sliding window limiter"}
 ```
 After 5 allowed requests (based on the strategy), you'll get:
 ```bash
-{
-  "message": "Too many requests"
-}
+curl : {"message":"Too many requests"}
+```
+
+⚠️ Note: If curl doesn't work on your system, you can test the limiter by spamming requests manually using Postman on:
+```
+GET http://localhost:3000/sliding
 ```
 
 ## 🧪 Sliding Window Rate Limiter: Usage in Code
